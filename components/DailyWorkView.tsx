@@ -1,7 +1,7 @@
 
 import React from 'react';
-import { useUser } from '../contexts/UserContext';
-import { useLanguage } from '../contexts/LanguageContext';
+import { useUser } from '@/contexts/UserContext';
+import { useLanguage } from '@/contexts/LanguageContext';
 
 interface DailyWorkViewProps {
     onFinish: () => void;

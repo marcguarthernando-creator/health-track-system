@@ -1,0 +1,8 @@
+
+{
+  "name": "Health Track - Elite Performance System",
+  "description": "A high-performance athlete management system featuring ACWR analysis, HRV tracking, and AI-driven coaching insights.",
+  "requestFramePermissions": [
+    "geolocation"
+  ]
+}

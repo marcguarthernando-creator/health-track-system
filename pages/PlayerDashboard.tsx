@@ -1,9 +1,9 @@
 
 import React, { useState, useEffect } from 'react';
-import { useUser } from '../contexts/UserContext';
-import { useLanguage } from '../contexts/LanguageContext';
+import { useUser } from '@/contexts/UserContext';
+import { useLanguage } from '@/contexts/LanguageContext';
 import { Link } from 'react-router-dom';
-import DailyWorkView from '../components/DailyWorkView';
+import DailyWorkView from '@/components/DailyWorkView';
 
 const PlayerDashboard: React.FC = () => {
     const { flowState, updateFlowState, logout, checkDailyReset, userEmail } = useUser();
@@ -46,12 +46,12 @@ const PlayerDashboard: React.FC = () => {
         <div className="bg-background-dark min-h-screen text-white flex flex-col font-display">
             <header className="sticky top-0 z-10 bg-[#0b1120]/90 backdrop-blur-md border-b border-[#334155] px-6 py-4 flex items-center justify-between">
                 <div className="flex items-center gap-3">
-                    <img src="/logo.png" alt="Logo" className="h-8 w-auto" />
+                    <img src="/logo.png" alt="Logo" className="h-8 w-auto mr-2" />
                     <span className="font-black italic tracking-tighter hidden md:inline">PLAYER <span className="text-primary italic">ZONE</span></span>
                 </div>
                 <div className="flex items-center gap-4">
                     <div className="text-right hidden md:block">
-                        <div className="font-black italic text-sm uppercase tracking-tighter">{userEmail === 'jugador@player.com' ? 'Babel Lipasi' : 'Alex Morgan'}</div>
+                        <div className="font-black italic text-sm uppercase tracking-tighter">{userEmail === 'jugador@player.com' ? 'Babel Lipasi' : 'Athlete'}</div>
                         <div className="text-[10px] text-secondary font-black uppercase tracking-widest opacity-60">Athlete</div>
                     </div>
                     <div className="size-10 bg-center bg-cover rounded-full border-2 border-[#1e293b] shadow-sm" style={{ backgroundImage: userEmail === 'jugador@player.com' ? 'url("/assets/photos/BABEL_LIPASI.PNG")' : 'url("https://picsum.photos/seed/alex/100/100")' }}></div>

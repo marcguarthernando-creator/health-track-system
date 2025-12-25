@@ -21,7 +21,6 @@ export interface PlayerData {
         fatigue: number;
         soreness: number;
     };
-    medicalHistory?: any[];
 }
 
 export const mockPlayers: PlayerData[] = [
@@ -43,15 +42,28 @@ export const mockPlayers: PlayerData[] = [
         id: '2',
         name: 'DANIEL RODRIGUEZ',
         position: 'BASE',
-        age: 20,
-        height: 188,
-        weight: 84,
+        age: 24,
+        height: 185,
+        weight: 80,
         image: '/assets/photos/DANIEL_RODRIGUEZ.PNG',
         riskStatus: 'Caution',
         riskScore: 45,
         load: 620,
         sleep: 72,
-        alertMessage: 'Fatiga acumulada alta',
-        integratedMetrics: { hrv: 55, rhr: 52, aal: 1400, minutes: 32, wbq: 3, fatigue: 4, soreness: 3 }
+        integratedMetrics: { hrv: 58, rhr: 52, aal: 1450, minutes: 32, wbq: 3, fatigue: 4, soreness: 3 }
+    },
+    {
+        id: '3',
+        name: 'MARC GUART',
+        position: 'ESCOLTA',
+        age: 27,
+        height: 192,
+        weight: 88,
+        image: 'https://picsum.photos/seed/marc/200/200',
+        riskStatus: 'Critical',
+        riskScore: 78,
+        load: 850,
+        sleep: 65,
+        integratedMetrics: { hrv: 45, rhr: 58, aal: 1800, minutes: 35, wbq: 2, fatigue: 5, soreness: 5 }
     }
 ];

@@ -11,12 +11,15 @@ interface Translations {
 }
 
 export const translations: Translations = {
+    // Login
     'login.welcome': { es: 'BIENVENIDO A', en: 'WELCOME TO' },
     'login.brand': { es: 'HEALTH TRACK', en: 'HEALTH TRACK' },
     'login.email_placeholder': { es: 'tu@email.com', en: 'your@email.com' },
     'login.button': { es: 'ENTRAR AL SISTEMA', en: 'ENTER SYSTEM' },
     'login.subtitle': { es: 'CB CANARIAS PERFORMANCE SYSTEM', en: 'CB CANARIAS PERFORMANCE SYSTEM' },
     'login.language': { es: 'Idioma', en: 'Language' },
+
+    // Sidebar
     'menu.dashboard': { es: 'Estado Equipo', en: 'Team Status' },
     'menu.questionnaires': { es: 'Cuestionarios', en: 'Questionnaires' },
     'menu.gym': { es: 'Gestión Gym', en: 'Gym Management' },
@@ -24,12 +27,22 @@ export const translations: Translations = {
     'menu.stats': { es: 'Estadísticas', en: 'Statistics' },
     'menu.medical_report': { es: 'Parte Médico', en: 'Medical Report' },
     'menu.logout': { es: 'Cerrar Sesión', en: 'Logout' },
+
+    // Staff Dashboard
     'staff.title': { es: 'PANEL DE CONTROL STAFF', en: 'STAFF DASHBOARD' },
+    'staff.player_table': { es: 'LISTADO DE JUGADORES', en: 'PLAYER LIST' },
     'staff.risk': { es: 'RIESGO', en: 'RISK' },
     'staff.load': { es: 'CARGA', en: 'LOAD' },
     'staff.sleep': { es: 'SUEÑO', en: 'SLEEP' },
     'staff.actions': { es: 'ACCIONES', en: 'ACTIONS' },
+
+    // Player Dashboard
     'player.welcome': { es: 'HOLA,', en: 'HELLO,' },
+    'player.tasks': { es: 'TAREAS DE HOY', en: 'TODAY\'S TASKS' },
+    'player.form_morning': { es: 'Cuestionario Mañana', en: 'Morning Form' },
+    'player.form_afternoon': { es: 'Cuestionario Tarde', en: 'Afternoon Form' },
+    'player.workout': { es: 'Sesión de Entrenamiento', en: 'Workout Session' },
+    'player.rest_day': { es: 'DÍA DE DESCANSO', en: 'REST DAY' },
     'player.done_title': { es: '¡Todo listo por hoy!', en: 'All Done For Today!' },
     'player.done_rest': { es: 'Disfruta tu día de descanso. ¡La recuperación es clave!', en: 'Enjoy your rest day. Recovery is key!' },
     'player.done_train': { es: 'Buen trabajo. Tus datos se han sincronizado con el staff.', en: 'Great job. Your data has been synced with the staff.' },

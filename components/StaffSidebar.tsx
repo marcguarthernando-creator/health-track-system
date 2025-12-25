@@ -1,8 +1,8 @@
 
 import React from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
-import { useUser } from '../contexts/UserContext';
-import { useLanguage } from '../contexts/LanguageContext';
+import { useUser } from '@/contexts/UserContext';
+import { useLanguage } from '@/contexts/LanguageContext';
 
 const StaffSidebar: React.FC = () => {
     const { logout, role } = useUser();

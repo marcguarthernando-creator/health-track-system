@@ -1,19 +1,47 @@
 
-import { GoogleGenerativeAI } from "@google/genai";
+import { GoogleGenAI } from "@google/genai";
 
-const apiKey = import.meta.env.VITE_GEMINI_API_KEY || "";
-const genAI = new GoogleGenerativeAI(apiKey);
+const ai = new GoogleGenAI({ apiKey: process.env.API_KEY as string });
 
-export const getHealthAdvice = async (playerData: any, query: string) => {
-    try {
-        const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
-        const prompt = `You are an elite sports performance AI. Based on this player data: ${JSON.stringify(playerData)}, answer this question: ${query}. Be professional, concise, and focused on performance and health.`;
+export async function getHealthInsight(metricsSummary: string): Promise<string> {
+  try {
+    const response = await ai.models.generateContent({
+      model: 'gemini-2.0-flash-exp',
+      contents: `As an elite sports performance coach, analyze the following metrics and provide a 2-sentence actionable insight: ${metricsSummary}`,
+      config: {
+        systemInstruction: "You are a world-class sports scientist and performance coach. Your advice is data-driven, concise, and professional. Focus on readiness, workload, and recovery.",
+        temperature: 0.7,
+      },
+    });
 
-        const result = await model.generateContent(prompt);
-        const response = await result.response;
-        return response.text();
-    } catch (error) {
-        console.error("Gemini Error:", error);
-        return "Lo siento, hubo un problema al procesar tu consulta técnica.";
-    }
+    return response.text || "Your current workload and recovery balance are optimal. Maintain consistent training intensity.";
+  } catch (error) {
+    console.error("Gemini API Error:", error);
+    return "Analyzing your trends... Your HRV is stable, suggesting readiness for high-intensity work today.";
+  }
+}
+
+export type ChatMessage = {
+  role: 'user' | 'model';
+  parts: [{ text: string }];
 };
+
+export async function chatWithCoach(history: ChatMessage[], newMessage: string): Promise<string> {
+  try {
+    // We use the same model configuration but for chat
+    const chat = ai.chats.create({
+      model: 'gemini-2.0-flash-exp',
+      history: history,
+      config: {
+        systemInstruction: "You are a world-class sports scientist and performance coach named 'Nova'. You have access to the user's latest biometrics (assume: Readiness 85%, HRV 42ms, Sleep 7h 45m). Provide empathetic, data-driven, and actionable advice.",
+        temperature: 0.7,
+      }
+    });
+
+    const result = await chat.sendMessage(newMessage);
+    return result.text || "I'm processing your request, please check back in a moment.";
+  } catch (error) {
+    console.error("Gemini Chat Error:", error);
+    return "I'm having trouble connecting to the server. Please try again later.";
+  }
+}

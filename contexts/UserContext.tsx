@@ -1,18 +1,17 @@
-
 import React, { createContext, useContext, useState, ReactNode } from 'react';
 
 export type UserRole = 'player' | 'staff-medico' | 'staff-fisio' | 'staff-prepa' | null;
 
 export interface FlowState {
-    formsCompleted: boolean;
+    formsCompleted: boolean; // Forms 1 & 2
     workoutAssigned: boolean;
     workoutCompleted: boolean;
-    postWorkoutFormCompleted: boolean;
-    showPeriodicForm: boolean;
-    lastCompletedDate: string | null;
-    isRestDay: boolean;
-    restDayDate: string | null;
-    dailyExercises: any[];
+    postWorkoutFormCompleted: boolean; // Form 4
+    showPeriodicForm: boolean; // Form 3
+    lastCompletedDate: string | null; // Track date of completion
+    isRestDay: boolean; // Staff controlled toggle
+    restDayDate: string | null; // Scheduled rest day
+    dailyExercises: any[]; // Current day's workout
 }
 
 interface UserContextType {
@@ -29,10 +28,10 @@ interface UserContextType {
 
 const defaultFlowState: FlowState = {
     formsCompleted: false,
-    workoutAssigned: true,
+    workoutAssigned: true, // Mock: workout is always assigned for now
     workoutCompleted: false,
     postWorkoutFormCompleted: false,
-    showPeriodicForm: false,
+    showPeriodicForm: false, // Default to false
     lastCompletedDate: null,
     isRestDay: false,
     restDayDate: null,
@@ -58,7 +57,7 @@ export const UserProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
         else if (lowEmail === 'fisio@staff.com') newRole = 'staff-fisio';
         else if (lowEmail === 'prepa@staff.com') newRole = 'staff-prepa';
         else if (lowEmail === 'jugador@player.com') newRole = 'player';
-        else if (lowEmail.includes('staff')) newRole = 'staff-medico';
+        else if (lowEmail.includes('staff')) newRole = 'staff-medico'; // Default
 
         setRole(newRole);
         setUserEmail(email);
@@ -68,11 +67,13 @@ export const UserProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
     const logout = () => {
         setRole(null);
         setUserEmail(null);
+        // setFlowState(defaultFlowState); // Removed as checkDailyReset handles daily resets
     };
 
     const updateFlowState = (updates: Partial<FlowState>) => {
         setFlowState(prev => {
             const newState = { ...prev, ...updates };
+            // If finishing final step (Form 4 OR Form 1 on Rest Day), mark current date
             if (updates.postWorkoutFormCompleted || (newState.isRestDay && updates.formsCompleted)) {
                 newState.lastCompletedDate = new Date().toDateString();
             }
@@ -83,7 +84,7 @@ export const UserProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
     const resetDailyFlow = () => {
         setFlowState(prev => ({
             ...defaultFlowState,
-            isRestDay: prev.isRestDay
+            isRestDay: prev.isRestDay // Preserve rest day setting until manually changed
         }));
     };
 
@@ -91,9 +92,11 @@ export const UserProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
         const today = new Date().toDateString();
         setFlowState(prev => {
             if (prev.lastCompletedDate !== today && prev.lastCompletedDate !== null) {
+                console.log("New day detected, resetting flow.");
                 return {
                     ...defaultFlowState,
                     isRestDay: prev.isRestDay,
+                    // Keep periodic form setting or recalculate it here
                 };
             }
             return prev;

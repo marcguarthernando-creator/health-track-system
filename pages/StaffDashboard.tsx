@@ -1,9 +1,9 @@
 
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import { mockPlayers, PlayerData } from '../data/mockPlayers';
-import StaffSidebar from '../components/StaffSidebar';
-import { useLanguage } from '../contexts/LanguageContext';
+import { mockPlayers, PlayerData } from '@/data/mockPlayers';
+import StaffSidebar from '@/components/StaffSidebar';
+import { useLanguage } from '@/contexts/LanguageContext';
 
 const StaffDashboard: React.FC = () => {
     const navigate = useNavigate();
